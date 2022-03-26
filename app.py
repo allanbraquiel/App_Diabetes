@@ -11,6 +11,14 @@ import streamlit.components.v1 as components
 import time
 import numpy as np
 
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+from sklearn.metrics import classification_report
+from sklearn.metrics import f1_score
+from sklearn.tree import DecisionTreeClassifier
+
 
 st.set_page_config(
     page_title="Squad Scikit-Learn",
@@ -75,14 +83,34 @@ user_input = st.sidebar.text_input("Digite seu nome")
 #escrevendo o nome do usuário
 st.write("Paciente:", user_input)
 
+# Separando as features
+
+x_data1 = df.drop(["Diabetes_binary"], axis=1, inplace=False)
+y_data = df["Diabetes_binary"]
+
+X = (x_data1 - np.min(x_data1)) / (np.max(x_data1) - np.min(x_data1)).values
 
 
+# separando os dados de treino e teste
+
+x_train, x_test, y_train, y_test = train_test_split(X, y_data, test_size=0.3, random_state=42) 
 
 
+# Decision tree
 
+from sklearn import tree
+arvore = tree.DecisionTreeClassifier()
+arvore.fit(x_train, y_train)
 
- 
-    
+result = arvore.predict(x_test)
+
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix
+
+st.write("Matriz de confusão: ", confusion_matrix(y_test, result))
+
+st.write("Score: ", arvore.score(x_test, y_test))
+# st.write(metrics.classification_report(y_test, result))
 
 
 
