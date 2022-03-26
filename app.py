@@ -11,19 +11,6 @@ import streamlit.components.v1 as components
 import time
 import numpy as np
 
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, accuracy_score
-from sklearn.metrics import precision_recall_fscore_support as score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn import metrics
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import RepeatedKFold
-from sklearn.model_selection import cross_val_score,cross_val_predict
-from sklearn.metrics import classification_report
-from sklearn.metrics import precision_recall_curve, roc_auc_score, roc_curve, auc
-from sklearn.metrics import f1_score
-from sklearn.tree import DecisionTreeClassifier
 
 st.set_page_config(
     page_title="Squad Scikit-Learn",
